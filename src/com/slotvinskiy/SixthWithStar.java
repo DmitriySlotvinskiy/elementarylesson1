@@ -12,8 +12,7 @@ public class SixthWithStar {
         String searchWord = "test";
         char[][] array = initCharArray();
         printArray(array);
-        boolean isWord = isWordInArray(array, searchWord);
-        if (isWord) {
+        if (isWordInArray(array, searchWord)) {
             System.out.println("Yes, there is word " + searchWord);
         } else {
             System.out.println("No, there isn't word " + searchWord);
@@ -51,18 +50,12 @@ public class SixthWithStar {
     }
 
     private static boolean isWordInArray(char[][] array, String searchWord) {
-        boolean isWord = false;
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLUMNS; j++) {
                 if (array[i][j] == searchWord.charAt(0)) {
-                    isWord = isWordInHorizontal(array, i, j, searchWord);
-                    if (isWord) {
+                    if (isWordInHorizontal(array, i, j, searchWord)
+                            || isWordInVertical(array, i, j, searchWord)) {
                         return true;
-                    } else {
-                        isWord = isWordInVertical(array, i, j, searchWord);
-                        if (isWord) {
-                            return true;
-                        }
                     }
                 }
             }
@@ -71,27 +64,25 @@ public class SixthWithStar {
     }
 
     private static boolean isWordInVertical(char[][] array, int i, int j, String word) {
-        if (word.length() + i <= ROWS) {
-            for (int k = 1; k < word.length(); k++) {
-                if (word.charAt(k) != array[i + k][j]) {
-                    return false;
-                }
-            }
-        } else {
+        if (word.length() + i > ROWS) {
             return false;
+        }
+        for (int k = 1; k < word.length(); k++) {
+            if (word.charAt(k) != array[i + k][j]) {
+                return false;
+            }
         }
         return true;
     }
 
     private static boolean isWordInHorizontal(char[][] array, int i, int j, String word) {
-        if (word.length() + j <= COLUMNS) {
-            for (int k = 1; k < word.length(); k++) {
-                if (word.charAt(k) != array[i][j + k]) {
-                    return false;
-                }
-            }
-        } else {
+        if (word.length() + j > COLUMNS) {
             return false;
+        }
+        for (int k = 1; k < word.length(); k++) {
+            if (word.charAt(k) != array[i][j + k]) {
+                return false;
+            }
         }
         return true;
     }
