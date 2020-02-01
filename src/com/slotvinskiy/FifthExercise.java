@@ -12,14 +12,7 @@ public class FifthExercise {
         System.out.println(resultString);
     }
 
-    private static String trimAndDeleteDoubleSpaces(String string1) {
-        StringBuilder sb = new StringBuilder(string1.trim());
-        for (int i = 0; i < sb.length() - 1; i++) {
-            if (sb.charAt(i) == ' ' && sb.charAt(i + 1) == ' ') {
-                sb.deleteCharAt(i);
-                i--;
-            }
-        }
-        return sb.toString();
+    private static String trimAndDeleteDoubleSpaces(String s) {
+        return s.trim().replaceAll("\\s+", " ");
     }
 }
